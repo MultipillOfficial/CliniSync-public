@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import axios from "axios";
 
 const EditProfile = () => {
   const router = useRouter();
@@ -26,27 +27,23 @@ const EditProfile = () => {
 
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch user profile from your API
+  // ✅ Fetch user profile from API using Axios
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch("https://your-api-url.com/profile/1"); // Change the URL
-        const data = await response.json();
-
-        // Set the data into the state
+        const response = await axios.get("https://your-api-url.com/profile/1"); // Change the URL
         setUser({
-          name: data.name,
-          username: data.username,
-          gender: data.gender,
-          age: data.age.toString(),
-          bloodGroup: data.bloodGroup,
-          phone: data.phone,
-          address: data.address,
+          name: response.data.name,
+          username: response.data.username,
+          gender: response.data.gender,
+          age: response.data.age.toString(),
+          bloodGroup: response.data.bloodGroup,
+          phone: response.data.phone,
+          address: response.data.address,
         });
-
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching profile:", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -59,7 +56,7 @@ const EditProfile = () => {
     setUser({ ...user, [key]: value });
   };
 
-  // ✅ Handle Save Profile
+  // ✅ Handle Save Profile using Axios
   const handleSave = async () => {
     if (!user.name || !user.phone) {
       Alert.alert("Error", "Name and Phone are required!");
@@ -67,23 +64,15 @@ const EditProfile = () => {
     }
 
     try {
-      const response = await fetch("https://your-api-url.com/profile/1", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
+      await axios.put("https://your-api-url.com/profile/1", user, {
+        headers: { "Content-Type": "application/json" },
       });
 
-      if (response.ok) {
-        Alert.alert("Success", "Profile updated successfully!");
-        router.push("/profile"); // ✅ Redirect to Profile Page
-      } else {
-        Alert.alert("Error", "Failed to update profile.");
-      }
+      Alert.alert("Success", "Profile updated successfully!");
+      router.push("/profile"); // ✅ Redirect to Profile Page
     } catch (error) {
       console.error("Error updating profile:", error);
-      Alert.alert("Error", "Something went wrong.");
+      Alert.alert("Error", "Failed to update profile.");
     }
   };
 

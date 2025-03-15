@@ -241,22 +241,40 @@ const styles = StyleSheet.create({
 
   actionButtons: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
+    justifyContent: "space-between", // Even spacing
+    alignItems: "center",
+    marginTop: 10,
+    paddingHorizontal: "2%", // Ensures equal left & right spacing
   },
   deleteButton: {
-    padding: 10,
-    borderWidth: 1,
+    flex: 1, // Makes all buttons take equal space
+    paddingVertical: 12, // Adjust height dynamically
+    borderRadius: 12,
+    borderWidth: 2,
     borderColor: "red",
-    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5, // Ensures proper spacing
   },
   editButton: {
-    padding: 10,
-    borderWidth: 1,
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 12,
+    borderWidth: 2,
     borderColor: "gray",
-    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5,
   },
-  callButton: { padding: 10, backgroundColor: "#2CD4D9", borderRadius: 10 },
+  callButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 12,
+    backgroundColor: "#00D49F",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5,
+  },
 
   modalContainer: {
     flex: 1,
