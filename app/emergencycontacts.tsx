@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const EmergencyContacts = () => {
   const router = useRouter();
@@ -76,6 +77,10 @@ const EmergencyContacts = () => {
   const makeCall = (phone) => {
     Linking.openURL(`tel:${phone}`);
   };
+
+  function renderTextInputModal(arg0: string, arg1: string): React.ReactNode {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <View style={styles.container}>
@@ -146,57 +151,10 @@ const EmergencyContacts = () => {
       </ScrollView>
 
       {/* Edit Modal */}
-      <Modal visible={isEditModalVisible} animationType="slide" transparent>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Edit Contact</Text>
-
-            <TextInput
-              style={styles.input}
-              placeholder="Name"
-              value={selectedContact?.name}
-              onChangeText={(text) =>
-                setSelectedContact({ ...selectedContact, name: text })
-              }
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
-              value={selectedContact?.phone}
-              keyboardType="phone-pad"
-              onChangeText={(text) =>
-                setSelectedContact({ ...selectedContact, phone: text })
-              }
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Relation"
-              value={selectedContact?.relation}
-              onChangeText={(text) =>
-                setSelectedContact({ ...selectedContact, relation: text })
-              }
-            />
-
-            <View style={styles.modalButtons}>
-              <TouchableOpacity
-                style={styles.modalCancel}
-                onPress={() => setEditModalVisible(false)}
-              >
-                <Text style={styles.modalCancelText}>Cancel</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.modalSave}
-                onPress={handleSaveEdit}
-              >
-                <Text style={styles.modalSaveText}>Save</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <SafeAreaView>
+        {renderTextInputModal("name", "Enter your name")}
+        {renderTextInputModal("username", "Enter your ID")}
+      </SafeAreaView>
     </View>
   );
 };
@@ -244,7 +202,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between", // Even spacing
     alignItems: "center",
     marginTop: 10,
-    paddingHorizontal: "2%", // Ensures equal left & right spacing
+    paddingHorizontal: "3%", // Ensures equal left & right spacing
   },
   deleteButton: {
     flex: 1, // Makes all buttons take equal space
