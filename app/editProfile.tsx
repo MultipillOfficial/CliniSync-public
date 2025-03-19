@@ -13,6 +13,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons, FontAwesome, Entypo, AntDesign } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const ProfileScreen = () => {
   const [activeModal, setActiveModal] = useState(null);
@@ -44,10 +45,27 @@ const ProfileScreen = () => {
 
   const handleSave = () => {
     if (activeModal) {
+      if (activeModal === "age") {
+        const ageNumber = parseInt(editingValue, 10);
+        if (isNaN(ageNumber) || ageNumber < 0 || ageNumber > 122) {
+          alert("Please enter a valid age between 1 and 122.");
+          return;
+        }
+      }
+
+      if (activeModal === "phoneNo") {
+        const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
+        if (!phoneRegex.test(editingValue)) {
+          alert("Please enter a valid Indian phone number.");
+          return;
+        }
+      }
+
       setProfileData({
         ...profileData,
         [activeModal]: editingValue,
       });
+
       setActiveModal(null);
     }
   };
@@ -183,10 +201,13 @@ const ProfileScreen = () => {
 
       {/* Header with back button */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push("/profile")}
+        >
           <Ionicons name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Profile</Text>
+        <Text style={styles.headerTitle}>Edit Profile</Text>
       </View>
 
       {/* Profile section */}

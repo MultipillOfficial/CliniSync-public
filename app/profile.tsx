@@ -8,33 +8,74 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router"; // Import useRouter for navigation
+import { useRouter } from "expo-router";
+import axios from "axios"; // Import axios
 import color from "@/assets/colors/color";
 
 const ProfileScreen = () => {
-  const router = useRouter(); // Navigation hook
+  const router = useRouter();
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Simulating fetching user profile from database/API
+  // Hardcoded data for testing phase
+  const testData = {
+    name: "Chaitanya Ambade",
+    username: "Chaitanya_090807",
+    gender: "Male",
+    age: "20",
+    bloodGroup: "B+",
+    phone: "9028727852",
+    address: "Plot no. 430, Kakde vasti, Kondhwa, Pune",
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      setProfile({
-        name: "Chaitanya Ambade",
-        username: "Chaitanya_090807",
-        gender: "Male",
-        age: "20",
-        bloodGroup: "B+",
-        phone: "9028727852",
-        address: "Plot no. 430, Kakde vasti, Kondhwa, Pune",
-      });
-    }, 0);
+    // Function to fetch profile data
+    const fetchProfileData = async () => {
+      setLoading(true);
+      try {
+        // For production, uncomment this section and modify the URL
+        /*
+        const response = await axios.get('https://your-api-endpoint.com/profile');
+        setProfile(response.data);
+        */
+
+        // Using hardcoded data for testing phase
+        // Simulating network delay
+        setTimeout(() => {
+          setProfile(testData);
+          setLoading(false);
+        }, 0);
+      } catch (err) {
+        console.error("Error fetching profile data:", err);
+        setError("Failed to load profile data");
+        setLoading(false);
+      }
+    };
+
+    fetchProfileData();
   }, []);
 
   // Show loader until profile data is available
-  if (!profile) {
+  if (loading) {
     return (
       <View style={styles.loaderContainer}>
         <ActivityIndicator size="large" color="#4CAF50" />
+      </View>
+    );
+  }
+
+  // Show error message if data fetching failed
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{error}</Text>
+        <TouchableOpacity
+          style={styles.retryButton}
+          onPress={() => fetchProfileData()}
+        >
+          <Text style={styles.retryButtonText}>Retry</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -43,7 +84,9 @@ const ProfileScreen = () => {
     <ScrollView style={styles.container}>
       {/* Profile Header */}
       <View style={styles.headerTopContainer}>
-        <Ionicons name="arrow-back" size={24} color="black" />
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile</Text>
       </View>
       <View style={styles.headerContainer}>
@@ -113,7 +156,7 @@ const ProfileScreen = () => {
         {
           label: "Health Preferences",
           icon: "heart",
-          screen: "insurance",
+          screen: "healthpreferences",
         },
         {
           label: "Data Privacy & Security",
@@ -167,6 +210,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  errorText: {
+    fontSize: 16,
+    color: "red",
+    marginBottom: 15,
+  },
+  retryButton: {
+    backgroundColor: color.primary,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: "white",
+    fontWeight: "bold",
   },
   headerTopContainer: {
     flexDirection: "row",
