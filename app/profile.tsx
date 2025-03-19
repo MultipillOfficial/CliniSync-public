@@ -156,7 +156,7 @@ const ProfileScreen = () => {
         {
           label: "Health Preferences",
           icon: "heart",
-          screen: "healthpreferences",
+          screen: "healthpreference",
         },
         {
           label: "Data Privacy & Security",

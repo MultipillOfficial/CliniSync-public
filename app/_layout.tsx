@@ -14,6 +14,9 @@ const RootLayout = () => {
       <Stack.Screen name="emergencycontacts" />
       <Stack.Screen name="editProfile" />
       <Stack.Screen name="insurance" />
+      <Stack.Screen name="healthpreference" />
+      <Stack.Screen name="parentdoctor" />
+      <Stack.Screen name="preferredpharmacy" />
     </Stack>
   );
 };
