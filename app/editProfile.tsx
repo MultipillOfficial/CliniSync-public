@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import { Ionicons, FontAwesome, Entypo, AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -317,7 +318,7 @@ const ProfileScreen = () => {
     </SafeAreaView>
   );
 };
-
+const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -326,48 +327,48 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: width * 0.04,
+    paddingVertical: height * 0.012,
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
   },
   backButton: {
-    padding: 5,
+    padding: width * 0.02,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "500",
-    marginLeft: 20,
+    marginLeft: width * 0.05,
   },
   profileSection: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingHorizontal: width * 0.05,
+    paddingVertical: height * 0.025,
   },
   profileAvatarContainer: {
     position: "relative",
   },
   profileAvatar: {
-    width: 65,
-    height: 65,
-    borderRadius: 32.5,
+    width: width * 0.17,
+    height: width * 0.17,
+    borderRadius: width * 0.085,
     backgroundColor: "#00d68f",
     justifyContent: "center",
     alignItems: "center",
   },
   avatarText: {
     color: "white",
-    fontSize: 28,
+    fontSize: width * 0.07,
     fontWeight: "bold",
   },
   qrBadge: {
     position: "absolute",
     bottom: 0,
     right: 0,
-    width: 22,
-    height: 22,
-    borderRadius: 11,
+    width: width * 0.055,
+    height: width * 0.055,
+    borderRadius: width * 0.0275,
     backgroundColor: "#222",
     justifyContent: "center",
     alignItems: "center",
@@ -375,43 +376,43 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
   },
   profileInfo: {
-    marginLeft: 18,
+    marginLeft: width * 0.045,
   },
   profileName: {
-    fontSize: 22,
+    fontSize: width * 0.055,
     fontWeight: "600",
   },
   profileUsername: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     color: "#777",
-    marginTop: 3,
+    marginTop: height * 0.005,
   },
   detailsContainer: {
-    paddingHorizontal: 20,
-    paddingTop: 15,
+    paddingHorizontal: width * 0.05,
+    paddingTop: height * 0.02,
   },
   detailItem: {
     flexDirection: "row",
-    paddingVertical: 12,
+    paddingVertical: height * 0.015,
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
   },
   iconContainer: {
-    width: 30,
+    width: width * 0.08,
     alignItems: "center",
     justifyContent: "center",
   },
   detailContent: {
     flex: 1,
-    paddingLeft: 15,
+    paddingLeft: width * 0.04,
   },
   detailLabel: {
-    fontSize: 14,
+    fontSize: width * 0.035,
     color: "#888",
-    marginBottom: 2,
+    marginBottom: height * 0.003,
   },
   detailValue: {
-    fontSize: 16,
+    fontSize: width * 0.04,
     color: "#333",
   },
   modalContainer: {
@@ -423,73 +424,73 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    padding: 20,
-    paddingBottom: Platform.OS === "ios" ? 40 : 20,
+    padding: width * 0.05,
+    paddingBottom: Platform.OS === "ios" ? height * 0.05 : height * 0.025,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "500",
-    marginBottom: 15,
+    marginBottom: height * 0.02,
     textAlign: "center",
   },
   modalInput: {
     borderWidth: 1,
     borderColor: "#e0e0e0",
     borderRadius: 10,
-    padding: 12,
-    fontSize: 16,
-    marginBottom: 20,
+    padding: height * 0.015,
+    fontSize: width * 0.04,
+    marginBottom: height * 0.03,
   },
   modalButtons: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    marginTop: height * 0.015,
   },
   cancelButton: {
-    fontSize: 16,
+    fontSize: width * 0.04,
     color: "#888",
-    padding: 5,
+    padding: width * 0.02,
   },
   saveButton: {
-    fontSize: 16,
+    fontSize: width * 0.04,
     color: "#00d68f",
     fontWeight: "600",
-    padding: 5,
+    padding: width * 0.02,
   },
   radioContainer: {
-    marginBottom: 10,
+    marginBottom: height * 0.012,
   },
   radioOption: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 12,
+    paddingVertical: height * 0.015,
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
   },
   radioButton: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: width * 0.05,
+    height: width * 0.05,
+    borderRadius: width * 0.025,
     borderWidth: 2,
     borderColor: "#00d68f",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 10,
+    marginRight: width * 0.03,
   },
   radioButtonSelected: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: width * 0.025,
+    height: width * 0.025,
+    borderRadius: width * 0.0125,
     backgroundColor: "#00d68f",
   },
   radioText: {
-    fontSize: 16,
+    fontSize: width * 0.04,
   },
   bloodGroupModalContent: {
     maxHeight: "60%",
   },
   bloodGroupScrollView: {
-    maxHeight: 300,
+    maxHeight: height * 0.4,
   },
 });
 
