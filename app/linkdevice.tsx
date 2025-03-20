@@ -8,6 +8,7 @@ import {
   Modal,
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const LinkDeviceScreen = () => {
   const [selectedPairedDevice, setSelectedPairedDevice] = useState(null);
@@ -32,7 +33,7 @@ const LinkDeviceScreen = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("profile")}>
           <AntDesign name="arrowleft" size={20} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Link Device</Text>

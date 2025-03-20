@@ -37,7 +37,7 @@ export default function DataPrivacySecurityScreen({ navigation }) {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.push("profile")}
         >
           <Ionicons name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>

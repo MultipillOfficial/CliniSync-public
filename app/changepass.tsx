@@ -7,9 +7,12 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+
+const { width } = Dimensions.get("window");
 
 export default function PasswordChangeScreen() {
   const router = useRouter();
@@ -19,6 +22,7 @@ export default function PasswordChangeScreen() {
   const [passwordStrength, setPasswordStrength] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [formError, setFormError] = useState("");
 
   const checkPasswordStrength = (password) => {
     let strength = "Weak";
@@ -38,6 +42,7 @@ export default function PasswordChangeScreen() {
     setNewPassword(password);
     setIsTyping(password.length > 0);
     checkPasswordStrength(password);
+    setFormError(""); // Reset error when typing
   };
 
   const handleRetypePasswordChange = (password) => {
@@ -46,12 +51,24 @@ export default function PasswordChangeScreen() {
   };
 
   const handleSaveChanges = () => {
-    if (passwordMatchError || newPassword === "" || retypePassword === "") {
-      console.log("Passwords do not match or are empty");
+    if (!currentPassword || !newPassword || !retypePassword) {
+      setFormError("All fields are required.");
       return;
     }
+
+    if (passwordMatchError) {
+      setFormError("Passwords do not match.");
+      return;
+    }
+
+    if (passwordStrength === "Weak") {
+      setFormError("Password is too weak. Please strengthen it.");
+      return;
+    }
+
     console.log("Password change requested");
-    // router.push("editProfile"); // Uncomment to navigate after successful change
+    // API call can be made here
+    // router.push("editProfile"); // Uncomment for navigation
   };
 
   return (
@@ -64,8 +81,9 @@ export default function PasswordChangeScreen() {
           style={styles.backButton}
           onPress={() => router.push("accountnsub")}
         >
-        <Ionicons name="arrow-back" size={24} color="#000" /></TouchableOpacity>
-        <Text style={styles.headerTitle}>Change password</Text>
+          <Ionicons name="arrow-back" size={24} color="#000" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Change Password</Text>
       </View>
 
       {/* Form */}
@@ -120,12 +138,22 @@ export default function PasswordChangeScreen() {
             • Include at least one number & symbol.
           </Text>
         </View>
+
+        {formError ? <Text style={styles.errorText}>{formError}</Text> : null}
       </View>
 
       {/* Buttons */}
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.saveButton} onPress={handleSaveChanges}>
-          <Text style={styles.saveButtonText}>Save changes</Text>
+        <TouchableOpacity
+          style={[
+            styles.saveButton,
+            (passwordMatchError || passwordStrength === "Weak") &&
+              styles.disabledButton,
+          ]}
+          onPress={handleSaveChanges}
+          disabled={passwordMatchError || passwordStrength === "Weak"}
+        >
+          <Text style={styles.saveButtonText}>Save Changes</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -147,33 +175,33 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: width * 0.04,
+    paddingVertical: width * 0.03,
   },
   backButton: {
     flexDirection: "row",
     alignItems: "center",
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: width * 0.05,
     fontWeight: "500",
-    marginLeft: 8,
+    marginLeft: width * 0.03,
   },
   form: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingHorizontal: width * 0.04,
+    paddingTop: width * 0.05,
   },
   input: {
     backgroundColor: "#f9f9f9",
     borderWidth: 1,
     borderColor: "#e0e0e0",
     borderRadius: 8,
-    padding: 12,
+    padding: width * 0.04,
     marginBottom: 8,
-    fontSize: 16,
+    fontSize: width * 0.04,
   },
   passwordStrength: {
-    fontSize: 14,
+    fontSize: width * 0.035,
     marginBottom: 16,
   },
   strong: {
@@ -187,7 +215,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "red",
-    fontSize: 14,
+    fontSize: width * 0.035,
     marginBottom: 8,
   },
   requirementsList: {
@@ -195,24 +223,27 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   requirementText: {
-    fontSize: 14,
+    fontSize: width * 0.035,
     color: "#777",
     marginBottom: 4,
   },
   buttonsContainer: {
-    padding: 16,
+    padding: width * 0.04,
     marginTop: "auto",
   },
   saveButton: {
     backgroundColor: "#00d68f",
     borderRadius: 8,
-    padding: 16,
+    padding: width * 0.045,
     alignItems: "center",
     marginBottom: 12,
   },
+  disabledButton: {
+    backgroundColor: "#b0e3d2",
+  },
   saveButtonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: width * 0.045,
     fontWeight: "500",
   },
   cancelButton: {
@@ -220,11 +251,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#e0e0e0",
     borderRadius: 8,
-    padding: 16,
+    padding: width * 0.045,
     alignItems: "center",
   },
   cancelButtonText: {
     color: "#000",
-    fontSize: 16,
+    fontSize: width * 0.045,
   },
 });

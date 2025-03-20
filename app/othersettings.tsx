@@ -1,20 +1,28 @@
 import React, { useState } from "react";
-import { View, Text, Switch, TouchableOpacity, StyleSheet } from "react-native";
+import { 
+  View, 
+  Text, 
+  Switch, 
+  TouchableOpacity, 
+  StyleSheet, 
+  Dimensions 
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
+
+const { width, height } = Dimensions.get("window");
 
 const OtherSettingsScreen = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [pillReminderEnabled, setPillReminderEnabled] = useState(false);
-  const [appointmentReminderEnabled, setAppointmentReminderEnabled] =
-    useState(false);
+  const [appointmentReminderEnabled, setAppointmentReminderEnabled] = useState(false);
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.push("/profile")}>
-          <AntDesign name="arrowleft" size={20} color="black" />
+          <AntDesign name="arrowleft" size={width * 0.05} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Other Settings & Accessibility</Text>
       </View>
@@ -24,9 +32,7 @@ const OtherSettingsScreen = () => {
         <View style={styles.settingRow}>
           <View>
             <Text style={styles.settingTitle}>Notification settings</Text>
-            <Text style={styles.settingDescription}>
-              Personalized Meal Alerts
-            </Text>
+            <Text style={styles.settingDescription}>Personalized Meal Alerts</Text>
           </View>
           <Switch
             value={notificationsEnabled}
@@ -45,9 +51,7 @@ const OtherSettingsScreen = () => {
         <View style={styles.settingRow}>
           <View>
             <Text style={styles.settingTitle}>Pill Reminder</Text>
-            <Text style={styles.settingDescription}>
-              Your daily medication schedule
-            </Text>
+            <Text style={styles.settingDescription}>Your daily medication schedule</Text>
           </View>
           <Switch
             value={pillReminderEnabled}
@@ -63,9 +67,7 @@ const OtherSettingsScreen = () => {
         <View style={styles.settingRow}>
           <View>
             <Text style={styles.settingTitle}>Appointment Reminder</Text>
-            <Text style={styles.settingDescription}>
-              Details for your upcoming visit
-            </Text>
+            <Text style={styles.settingDescription}>Details for your upcoming visit</Text>
           </View>
           <Switch
             value={appointmentReminderEnabled}
@@ -83,32 +85,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingHorizontal: width * 0.04,
+    paddingTop: height * 0.02,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: height * 0.02,
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: width * 0.045,
     fontWeight: "bold",
-    marginLeft: 10,
+    marginLeft: width * 0.03,
     color: "#000",
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: width * 0.04,
     fontWeight: "bold",
     color: "#888",
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: height * 0.03,
+    marginBottom: height * 0.015,
   },
   section: {
     backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 10,
+    borderRadius: width * 0.03,
+    padding: width * 0.04,
+    marginBottom: height * 0.015,
   },
   settingRow: {
     flexDirection: "row",
@@ -116,14 +118,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   settingTitle: {
-    fontSize: 16,
+    fontSize: width * 0.045,
     fontWeight: "bold",
     color: "#000",
   },
   settingDescription: {
-    fontSize: 14,
+    fontSize: width * 0.04,
     color: "#888",
-    marginTop: 2,
+    marginTop: height * 0.005,
   },
 });
 

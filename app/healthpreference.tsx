@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Switch, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, Switch, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+
+const { width, height } = Dimensions.get("window");
 
 const HealthPreferencesScreen = () => {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ const HealthPreferencesScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="black" />
+          <Ionicons name="arrow-back" size={width * 0.06} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Health Preferences</Text>
       </View>
@@ -22,7 +23,7 @@ const HealthPreferencesScreen = () => {
         onPress={() => navigation.navigate("parentdoctor")}
       >
         <Text style={styles.listText}>Parent doctor details</Text>
-        <Ionicons name="chevron-forward" size={20} color="gray" />
+        <Ionicons name="chevron-forward" size={width * 0.05} color="gray" />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -30,7 +31,7 @@ const HealthPreferencesScreen = () => {
         onPress={() => navigation.navigate("preferredpharmacy")}
       >
         <Text style={styles.listText}>Preferred pharmacy</Text>
-        <Ionicons name="chevron-forward" size={20} color="gray" />
+        <Ionicons name="chevron-forward" size={width * 0.05} color="gray" />
       </TouchableOpacity>
 
       <View style={styles.listItem}>
@@ -45,31 +46,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 16,
+    padding: width * 0.04,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
+    paddingVertical: height * 0.02,
+    paddingHorizontal: width * 0.04,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
     backgroundColor: "#fff",
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: width * 0.05,
     fontWeight: "bold",
-    marginLeft: 10,
+    marginLeft: width * 0.02,
   },
   listItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 15,
+    paddingVertical: height * 0.018,
     borderBottomWidth: 0.5,
     borderBottomColor: "#ccc",
   },
   listText: {
-    fontSize: 16,
+    fontSize: width * 0.045,
   },
 });
 

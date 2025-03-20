@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { AntDesign, Feather } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const FamilySettingsScreen = () => {
   const [familyMembers, setFamilyMembers] = useState([]);
@@ -63,7 +64,7 @@ const FamilySettingsScreen = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("profile")}>
           <AntDesign name="arrowleft" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.header}>Family Settings</Text>
