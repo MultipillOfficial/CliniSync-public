@@ -253,6 +253,7 @@ const EmergencyContacts = () => {
                     {contact.name.charAt(0)}
                   </Text>
                 </View>
+                <View style={styles.section}></View>
                 <View style={styles.contactInfo}>
                   <Text style={styles.contactName}>{contact.name}</Text>
                   <Text style={styles.contactPhone}>{contact.phone}</Text>
@@ -315,8 +316,12 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    backgroundColor: "#fff",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "bold" },
   loadingText: {

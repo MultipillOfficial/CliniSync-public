@@ -144,8 +144,11 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    backgroundColor: "#fff",
     justifyContent: "space-between",
-    marginBottom: 20,
   },
   headerTitle: { fontSize: 20, fontWeight: "bold" },
   noDataText: {

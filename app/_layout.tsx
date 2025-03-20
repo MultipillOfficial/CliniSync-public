@@ -17,6 +17,8 @@ const RootLayout = () => {
       <Stack.Screen name="healthpreference" />
       <Stack.Screen name="parentdoctor" />
       <Stack.Screen name="preferredpharmacy" />
+      <Stack.Screen name="dataprivacynsecurity" />
+      <Stack.Screen name="activitylog" />
     </Stack>
   );
 };

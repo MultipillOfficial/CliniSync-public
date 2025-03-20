@@ -161,7 +161,7 @@ const ProfileScreen = () => {
         {
           label: "Data Privacy & Security",
           icon: "lock-closed",
-          screen: "dataprivacy",
+          screen: "dataprivacynsecurity",
         },
         {
           label: "Account and Subscription",
