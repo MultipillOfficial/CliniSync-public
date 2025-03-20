@@ -23,6 +23,7 @@ const RootLayout = () => {
       <Stack.Screen name="changepass" />
       <Stack.Screen name="subscription" />
       <Stack.Screen name="billinghistory" />
+      <Stack.Screen name="family" />
     </Stack>
   );
 };
