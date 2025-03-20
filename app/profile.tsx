@@ -166,7 +166,7 @@ const ProfileScreen = () => {
         {
           label: "Account and Subscription",
           icon: "person-circle",
-          screen: "account",
+          screen: "accountnsub",
         },
         { label: "Family", icon: "people", screen: "family" },
         { label: "Linked Devices", icon: "link", screen: "linkeddevices" },

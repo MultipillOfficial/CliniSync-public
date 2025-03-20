@@ -19,6 +19,10 @@ const RootLayout = () => {
       <Stack.Screen name="preferredpharmacy" />
       <Stack.Screen name="dataprivacynsecurity" />
       <Stack.Screen name="activitylog" />
+      <Stack.Screen name="accountnsub" />
+      <Stack.Screen name="changepass" />
+      <Stack.Screen name="subscription" />
+      <Stack.Screen name="billinghistory" />
     </Stack>
   );
 };
