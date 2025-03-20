@@ -25,6 +25,7 @@ const RootLayout = () => {
       <Stack.Screen name="billinghistory" />
       <Stack.Screen name="family" />
       <Stack.Screen name="othersettings" />
+      <Stack.Screen name="linkdevice" />
     </Stack>
   );
 };

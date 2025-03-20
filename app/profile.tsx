@@ -169,7 +169,7 @@ const ProfileScreen = () => {
           screen: "accountnsub",
         },
         { label: "Family", icon: "people", screen: "family" },
-        { label: "Linked Devices", icon: "link", screen: "linkeddevices" },
+        { label: "Linked Devices", icon: "link", screen: "linkdevice" },
         {
           label: "Other Settings & Accessibility",
           icon: "settings",
