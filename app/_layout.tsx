@@ -24,6 +24,7 @@ const RootLayout = () => {
       <Stack.Screen name="subscription" />
       <Stack.Screen name="billinghistory" />
       <Stack.Screen name="family" />
+      <Stack.Screen name="othersettings" />
     </Stack>
   );
 };

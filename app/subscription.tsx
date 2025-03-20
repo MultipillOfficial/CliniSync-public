@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios"; // Import axios
+import { router } from "expo-router";
 
 export default function SubscriptionScreen() {
   const [subscription, setSubscription] = useState(null);
@@ -48,7 +49,10 @@ export default function SubscriptionScreen() {
       <StatusBar barStyle="dark-content" />
 
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push("/accountnsub")}
+        >
           <Ionicons name="arrow-back" size={24} color="#777" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Subscription</Text>

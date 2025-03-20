@@ -173,7 +173,7 @@ const ProfileScreen = () => {
         {
           label: "Other Settings & Accessibility",
           icon: "settings",
-          screen: "settings",
+          screen: "othersettings",
         },
       ].map((item, index) => (
         <TouchableOpacity
